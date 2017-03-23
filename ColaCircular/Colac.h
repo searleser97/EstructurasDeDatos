@@ -4,11 +4,6 @@ typedef struct Nodo
 {
 	Elem dato;
 	struct Nodo *sig;
-} *Lista;
-
-typedef struct ApUltimo
-{
-	Lista ultimo;
 } *Colac;
 
 // Signatura
@@ -19,6 +14,8 @@ Colac formarC(Elem, Colac);
 Colac rotar(Colac);
 void impColac(Colac);
 Colac randColac(int size);
+Elem primero(Colac);
+Colac desformar(Colac);
 // fin signatura
 
 
@@ -27,45 +24,44 @@ int random(int from, int to) {
 	return rand() % (to + 1 - from) + from;;
 }
 
-int esNuevac(Colac c) {return c -> ultimo == NULL;}
+int esNuevac(Colac c) {return c == NULL;}
 
 Colac nuevac() {
-
-	Colac cc = (Colac) malloc(sizeof(struct ApUltimo));
-	cc -> ultimo = NULL;
-	return cc;
+	return NULL;
 }
 
 Colac formarC(Elem e, Colac c) {
 
-	Lista nuevo = (Lista) malloc(sizeof(struct Nodo));
+	Colac nuevo = (Colac) malloc(sizeof(struct Nodo));
 	nuevo ->  dato = e;
 
-	if (esNuevac(c))
+	if (esNuevac(c)) {
+
 		nuevo -> sig = nuevo;
+	}
 	else {
-		// nuevo ultimo = primero de la cola
-		nuevo -> sig = c -> ultimo -> sig;
+		// el siguiente de nuevo ultimo = primero de la cola
+		nuevo -> sig = c -> sig;
 		// ultimo = nuevo
-		c -> ultimo -> sig = nuevo;
+		c -> sig = nuevo;
 	}
 
-	c -> ultimo = nuevo;
+	c = nuevo;
 
 	return c;
 }
 
 Colac rotar(Colac c) {
-	c -> ultimo = c -> ultimo -> sig;
+	c = c -> sig;
 	return c;
 }
 
 void impColac(Colac c) {
-	Lista tmp = c -> ultimo;
+	Colac tmp = c;
 	while (true) {
-		cout << c -> ultimo -> sig -> dato << " ";
+		cout << c -> sig -> dato << " ";
 		c = rotar(c);
-		if (c -> ultimo == tmp) break;
+		if (c == tmp) break;
 	}
 }
 
@@ -77,4 +73,18 @@ Colac randColac(int size) {
 	}
 
 	return c;
+}
+
+Elem primero(Colac cc) {
+	return cc -> sig -> dato;
+}
+
+Colac desformar(Colac cc) {
+	Colac tmp = cc -> sig;
+
+	cc -> sig = cc -> sig -> sig;
+
+	free(tmp);
+
+	return cc;
 }

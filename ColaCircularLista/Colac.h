@@ -43,11 +43,10 @@ Colac formarC(Elem e, Colac c) {
 
 	if (esNuevac(c))
 		nuevo -> sig = nuevo;
-	else if (c -> ultimo == c -> ultimo -> sig) {
-		c -> ultimo -> sig = nuevo;
-		nuevo -> sig = c -> ultimo;
-	} else {
+	else {
+		// nuevo ultimo = primero de la cola
 		nuevo -> sig = c -> ultimo -> sig;
+		// ultimo = nuevo
 		c -> ultimo -> sig = nuevo;
 	}
 

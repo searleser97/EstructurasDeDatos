@@ -4,6 +4,7 @@
 typedef struct Nodo {
 	Elem dato;
 	struct Nodo* sig;
+	struct Node* ant;
 } *ApNodo;
 
 typedef struct CNodo
@@ -27,10 +28,12 @@ Cola formar(Cola q, Elem e) {
 	ApNodo nodo = (ApNodo) malloc(sizeof(struct Nodo));
 	nodo -> dato = e;
 	nodo -> sig = NULL;
+	nodo -> ant = NULL;
 	if (esNueva(q)) {
 		q -> prim = nodo;
 		q -> ult = nodo;
 	} else {
+		nodo -> ant = q -> ult;
 		q -> ult -> sig = nodo;
 		q -> ult = nodo;
 	}

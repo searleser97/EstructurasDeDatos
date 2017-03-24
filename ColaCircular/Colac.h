@@ -24,7 +24,9 @@ int random(int from, int to) {
 	return rand() % (to + 1 - from) + from;;
 }
 
-int esNuevac(Colac c) {return c == NULL;}
+int esNuevac(Colac c) {
+	return c == NULL;
+}
 
 Colac nuevac() {
 	return NULL;
@@ -58,8 +60,9 @@ Colac rotar(Colac c) {
 
 void impColac(Colac c) {
 	Colac tmp = c;
+	if (esNuevac(c)) return;
 	while (true) {
-		cout << c -> sig -> dato << " ";
+		impElem(primero(c));
 		c = rotar(c);
 		if (c == tmp) break;
 	}
@@ -67,9 +70,12 @@ void impColac(Colac c) {
 
 Colac randColac(int size) {
 	Colac c = nuevac();
+	int id = 5;
 	while (size--) {
-		Elem e = random(33, 126);
+
+		Elem e = nuevoElem(id, random(5, 15));
 		c = formarC(e, c);
+		id++;
 	}
 
 	return c;
@@ -80,6 +86,10 @@ Elem primero(Colac cc) {
 }
 
 Colac desformar(Colac cc) {
+
+	if (cc -> sig == cc -> sig -> sig)
+		return nuevac();
+
 	Colac tmp = cc -> sig;
 
 	cc -> sig = cc -> sig -> sig;

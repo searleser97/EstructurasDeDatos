@@ -25,6 +25,7 @@ Elem nuevoElem(ElemValue id, int time) {
 	e -> tiempo = time;
 	return e;
 }
+
 // max process is 8
 // 5 a 12 id procesos
 // 5 a 15 tiempo

@@ -33,12 +33,26 @@ public: Node<T>* right;
 		return _size(this);
 	}
 
+	public: T value() {
+		return this -> data;
+	}
+
+	public: Node<T>* leftChild() {
+		return this -> left;
+	}
+
+	public: Node<T>* rightChild() {
+		return this -> right;
+	}
+
 	private: int _size(Node<T>* root) {
 		if (root == NULL)
 			return 0;
 		else
 			return 1 + _size(root -> left) + _size(root -> right);
 	}
+
+
 
 };
 
@@ -84,6 +98,12 @@ int main () {
 	cout << "isEmpty() = " << (root -> isEmpty() ? "True" : "False") << endl;
 	cout << endl;
 	cout << "size() = " << root -> size() << endl;
+	cout << endl;
+	cout << "root value = " << root -> value() << endl;
+	cout << endl;
+	cout << "left child value = " << root -> leftChild() -> value() << endl;
+	cout << endl;
+	cout << "right child value = " << root -> rightChild() -> value() << endl;
 
 	return 0;
 }

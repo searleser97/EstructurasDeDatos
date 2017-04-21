@@ -22,36 +22,46 @@ public: Node<T>* right;
 		this -> right = right;
 	}
 
-	public: bool isEmpty() {
+public: bool isEmpty() {
 		if (this == NULL)
 			return true;
 		else
 			return false;
 	}
 
-	public: int size () {
+public: int size () {
 		return _size(this);
 	}
 
-	public: T value() {
+public: T value() {
 		return this -> data;
 	}
 
-	public: Node<T>* leftChild() {
+public: Node<T>* leftChild() {
 		return this -> left;
 	}
 
-	public: Node<T>* rightChild() {
+public: Node<T>* rightChild() {
 		return this -> right;
 	}
 
-	private: int _size(Node<T>* root) {
+private: int _size(Node<T>* root) {
 		if (root == NULL)
 			return 0;
 		else
 			return 1 + _size(root -> left) + _size(root -> right);
 	}
 
+	public: int height() {
+		return _height(this);
+	}
+
+	private: int _height(Node<T>* root) {
+		if (!root)
+			return 0;
+
+		return 1 + max(_height(root -> left), _height(root -> right));
+	}
 
 
 };
@@ -98,6 +108,8 @@ int main () {
 	cout << "isEmpty() = " << (root -> isEmpty() ? "True" : "False") << endl;
 	cout << endl;
 	cout << "size() = " << root -> size() << endl;
+	cout << endl;
+	cout << "height() = " << root -> height() << endl;
 	cout << endl;
 	cout << "root value = " << root -> value() << endl;
 	cout << endl;

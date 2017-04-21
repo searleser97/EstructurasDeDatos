@@ -9,18 +9,18 @@ typedef struct Nodo {
 
 typedef struct CNodo
 {
-	ApNodo prim;
-	ApNodo ult;
+	ApNodo izq;
+	ApNodo der;
 } *Cola;
 
 Cola nueva() {
 	Cola nueva = (Cola) malloc(sizeof(struct CNodo));
-	nueva -> prim = nueva -> ult = NULL;
+	nueva -> izq = nueva -> der = NULL;
 	return nueva;
 }
 
 int esNueva(Cola q) {
-	return q -> prim == NULL;
+	return q -> izq == NULL;
 }
 
 // solo se esta regresando 'Cola q' para que algo como 'formar(formar(formar(formar(q, 'a'), 'b'), 'c'), 'd');' funcione
@@ -30,18 +30,18 @@ Cola formar(Cola q, Elem e) {
 	nodo -> sig = NULL;
 	nodo -> ant = NULL;
 	if (esNueva(q)) {
-		q -> prim = nodo;
-		q -> ult = nodo;
+		q -> izq = nodo;
+		q -> der = nodo;
 	} else {
-		nodo -> ant = q -> ult;
-		q -> ult -> sig = nodo;
-		q -> ult = nodo;
+		nodo -> ant = q -> der;
+		q -> der -> sig = nodo;
+		q -> der = nodo;
 	}
 	return q;
 }
 
 Elem frente(Cola q) {
-	return q -> prim -> dato;
+	return q -> izq -> dato;
 }
 
 void desformar(Cola q) {
@@ -50,20 +50,20 @@ void desformar(Cola q) {
 	}
 
 	// se pone aqui el temp para que el free(temp) aplique para cualquiera de los dos casos siguientes
-	ApNodo temp = q -> prim;
+	ApNodo temp = q -> izq;
 
-	if (q -> prim == q -> ult) {
-		q -> prim = q -> ult = NULL;
+	if (q -> izq == q -> der) {
+		q -> izq = q -> der = NULL;
 		return;
 	}
 
-	q -> prim = q -> prim -> sig;
+	q -> izq = q -> izq -> sig;
 
 	free(temp);
 }
 
 void impCola(Cola q) {
-	ApNodo primero = q -> prim;
+	ApNodo primero = q -> izq;
 	while (primero != NULL) {
 		std::cout << primero -> dato << std::endl;
 		primero = primero -> sig;

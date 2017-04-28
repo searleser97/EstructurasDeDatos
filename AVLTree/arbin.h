@@ -1,7 +1,7 @@
 #include <cstdlib>
 #include <iostream>
 using namespace std;
-typedef char Elem;
+typedef int Elem;
 
 typedef struct Node {
     struct Node* left;

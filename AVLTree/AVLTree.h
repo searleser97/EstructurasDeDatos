@@ -3,7 +3,7 @@ using namespace std;
 
 typedef Dicbin Avl;
 
-Avl createAvl(Elem data = 'A', Avl left = nullptr, Avl right = nullptr) {
+Avl createAvl(Elem data = NULL, Avl left = nullptr, Avl right = nullptr) {
     Avl a = (Avl) createDicbin(data, left, right);
     return a;
 }
@@ -38,14 +38,9 @@ Avl balance(Avl a) {
     if (isAvl(a)) {
         return createAvl(val(a), balance(left(a)), balance(right(a)));
     } else if (balfact(a) > 0) {
-        if (balfact(a) > 0)
-            return rotateRight(a);
-        else
-            return rotateRightLeft(a);
-    } else if (balfact(right(a)) < 0)
+        return rotateRight(a);
+    } else if (balfact(a) < 0)
         return rotateLeft(a);
-    else
-        return rotateLeftRight(a);
 }
 
 Avl insertAvl(Elem data, Avl root) {

@@ -1,7 +1,7 @@
 // Author: Sergio Silvester
 
 #include <iostream>
-#include "dicbin.h"
+#include "AVLTree.h"
 
 using namespace std;
 
@@ -17,10 +17,12 @@ int main () {
 	cout << "isEmpty() = " << (empty(root) ? "True" : "False") << endl;
 	cout << endl;
 
-    root = createDicbin('C');
-    root = insert('A', root);
-    root = insert('D', root);
-    root = insert('B', root);
+    root = createDicbin('A');
+    root = insertAvl('B', root);
+    root = insertAvl('C', root);
+    root = insertAvl('D', root);
+    root = insertAvl('E', root);
+    root = insertAvl('F', root);
 
 	cout << "Postorder----------" << endl << endl;
 	postorder(root);
@@ -43,6 +45,10 @@ int main () {
 	cout << "left child value = " <<  val(left(root)) << endl;
 	cout << endl;
 	cout << "right child value = " << val(right(root)) << endl;
+    cout << endl;
+    cout << "left child of right child value = " << val(left(right(root))) << endl;
+    cout << endl;
+    cout << "right child of right child value = " << val(right(right(root))) << endl;
 
 	return 0;
 }

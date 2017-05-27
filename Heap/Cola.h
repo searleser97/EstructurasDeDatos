@@ -1,7 +1,7 @@
 #include <cstdlib>
 
 typedef struct Nodo {
-	Avl dato;
+	Arbin dato;
 	struct Nodo* sig;
 } *ApNodo;
 
@@ -23,7 +23,7 @@ int esNueva(Cola q) {
 }
 
 // solo se esta regresando 'Cola q' para que algo como 'formar(formar(formar(formar(q, 'a'), 'b'), 'c'), 'd');' funcione
-Cola formar(Cola q, Avl e) {
+Cola formar(Cola q, Arbin e) {
     q -> size = q -> size + 1;
 	ApNodo nodo = (ApNodo) malloc(sizeof(struct Nodo));
 	nodo -> dato = e;
@@ -38,7 +38,7 @@ Cola formar(Cola q, Avl e) {
 	return q;
 }
 
-Avl frente(Cola q) {
+Arbin frente(Cola q) {
 	return q -> prim -> dato;
 }
 

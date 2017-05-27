@@ -1,14 +1,12 @@
 #include <cstdlib>
-#include <cmath>
-#include <iostream>
 using namespace std;
-typedef char Elem;
+typedef int Elem;
 
 typedef struct Node {
     struct Node* left;
     struct Node* right;
+    int size = 0;
     Elem data;
-    int size;
 } *Arbin;
 
 Arbin createArbin(Elem e, Arbin left = nullptr, Arbin right = nullptr) {
@@ -16,6 +14,7 @@ Arbin createArbin(Elem e, Arbin left = nullptr, Arbin right = nullptr) {
     t -> data = e;
     t -> left = left;
     t -> right = right;
+
     int Lsize = 0, Rsize = 0;
 
     if (left)
@@ -24,6 +23,7 @@ Arbin createArbin(Elem e, Arbin left = nullptr, Arbin right = nullptr) {
         Rsize = right -> size;
 
     t -> size = 1 + Lsize + Rsize;
+    
     return t;
 }
 

@@ -39,26 +39,4 @@ Dicbin insert(Elem data, Dicbin root) {
         return createDicbin(val(root), insert(data, left(root)), right(root));
     else
         return createDicbin(val(root), left(root), insert(data, right(root)));
-
 }
-
-// Dicbin insert(Elem data, Dicbin root) {
-
-//     if (!root -> data)
-//         root -> data = data;
-//     else {
-//         if (data <= root -> data) {
-//             if (!root -> left)
-//                 root -> left = createDicbin(data);
-//             else
-//                 insert(data, root -> left);
-//         } else {
-//             if (!root -> right)
-//                 root -> right = createDicbin(data);
-//             else
-//                 insert(data, root -> right);
-//         }
-//     }
-
-//     return root;
-// }

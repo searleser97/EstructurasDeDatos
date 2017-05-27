@@ -56,41 +56,18 @@ int main () {
 
     cin >> n;
     if (n == 0) {
+
         root = createDicbin('A');
-        printBfs(root);
-        cout << "*******" << endl;
-        root = insert('B', root);
-        printBfs(root);
-        cout << "*******" << endl;
-        root = insert('C', root);
-        printBfs(root);
-        cout << "*******" << endl;
-        root = insert('D', root);
-        printBfs(root);
-        cout << "*******" << endl;
-        root = insert('E', root);
-        printBfs(root);
-        cout << "*******" << endl;
-        root = insert('F', root);
-        printBfs(root);
-        cout << "*******" << endl;
-        root = insert('G', root);
-        printBfs(root);
-        cout << "*******" << endl;
-        root = insert('H', root);
-        printBfs(root);
-        cout << "*******" << endl;
-        root = insert('I', root);
-        printBfs(root);
-        cout << "*******" << endl;
-        root = insert('J', root);
-        printBfs(root);
-        cout << "*******" << endl;
-        root = insert('K', root);
-        printBfs(root);
-        cout << "*******" << endl;
+
+        for (int i = 'B'; i < 'M'; ++i)
+        {
+            root = insert(i, root);
+            printBfs(root);
+            cout << root -> size << endl;
+            cout << "*******" << endl;
+        }
         ////////////////////////////////// Dicbin to Avl
-        root = insertAvl('L', root);
+        root = balance(root);
         printBfs(root);
         cout << "*******" << endl;
 
@@ -98,7 +75,7 @@ int main () {
         Elem aux;
         cin >> aux;
         root = createDicbin(aux);
-        n -=1;
+        n -= 1;
         for (int i = 0; i < n; ++i)
         {
             Elem input;

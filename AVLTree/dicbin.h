@@ -2,7 +2,7 @@
 
 typedef Arbin Dicbin;
 
-Dicbin createDicbin(Elem data = 'A', Dicbin left = nullptr, Dicbin right = nullptr) {
+Dicbin createDicbin(Elem data = NULL, Dicbin left = nullptr, Dicbin right = nullptr) {
     Dicbin t = (Dicbin) createArbin(data, left, right);
     return t;
 }

@@ -11,18 +11,19 @@ void inorder(Dicbin root);
 
 int main () {
 
-	Dicbin root = NULL;
+	Avl root = NULL;
 
 	cout << endl;
 	cout << "isEmpty() = " << (empty(root) ? "True" : "False") << endl;
 	cout << endl;
 
-    root = createDicbin('A');
+    root = createAvl('A');
     root = insertAvl('B', root);
     root = insertAvl('C', root);
     root = insertAvl('D', root);
     root = insertAvl('E', root);
     root = insertAvl('F', root);
+    root = insertAvl('G', root);
 
 	cout << "Postorder----------" << endl << endl;
 	postorder(root);

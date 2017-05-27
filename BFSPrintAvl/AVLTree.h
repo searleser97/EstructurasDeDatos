@@ -3,9 +3,13 @@ using namespace std;
 
 typedef Dicbin Avl;
 
-Avl createAvl(Elem data = 'A', Avl left = nullptr, Avl right = nullptr) {
+Avl createAvl(Elem data = NULL, Avl left = nullptr, Avl right = nullptr) {
     Avl a = (Avl) createDicbin(data, left, right);
     return a;
+}
+
+Elem rootVal(Avl root) {
+    return value((Arbin) root);
 }
 
 Avl rotateLeft(Avl a) {
@@ -20,14 +24,6 @@ int balfact(Avl a) {
     return _height(left(a)) - _height(right(a));
 }
 
-Avl rotateLeftRight(Avl a) {
-    return rotateLeft(createAvl(val(a), left(a), rotateRight(right(a))));
-}
-
-Avl rotateRightLeft(Avl a) {
-    return rotateRight(createAvl(val(a), rotateLeft(left(a)), right(a)));
-}
-
 bool isAvl(Avl a) {
     return abs(balfact(a)) <= 1;
 }
@@ -35,19 +31,21 @@ bool isAvl(Avl a) {
 Avl balance(Avl a) {
     if (!a)
         return a;
+
+    Avl aux;
+
     if (isAvl(a)) {
         return createAvl(val(a), balance(left(a)), balance(right(a)));
-    } else if (balfact(a) > 0) {
-        if (balfact(a) > 0)
-            return rotateRight(a);
-        else
-            return rotateRightLeft(a);
-    } else if (balfact(right(a)) < 0)
-        return rotateLeft(a);
-    else
-        return rotateLeftRight(a);
+    } else if (balfact(a) > 1) {
+        aux = rotateRight(a);
+    } else {
+        aux = rotateLeft(a);
+    }
+    return balance(aux);
 }
 
 Avl insertAvl(Elem data, Avl root) {
-    return balance(insert(data, root));
+    root = insert(data, root);
+    return balance(root);
 }
+

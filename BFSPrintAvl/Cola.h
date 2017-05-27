@@ -1,7 +1,7 @@
 #include <cstdlib>
 
 typedef struct Nodo {
-	Elem dato;
+	Avl dato;
 	struct Nodo* sig;
 } *ApNodo;
 
@@ -22,7 +22,8 @@ int esNueva(Cola q) {
 }
 
 // solo se esta regresando 'Cola q' para que algo como 'formar(formar(formar(formar(q, 'a'), 'b'), 'c'), 'd');' funcione
-Cola formar(Cola q, Elem e) {
+Cola formar(Cola q, Avl e) {
+
 	ApNodo nodo = (ApNodo) malloc(sizeof(struct Nodo));
 	nodo -> dato = e;
 	nodo -> sig = NULL;
@@ -36,32 +37,47 @@ Cola formar(Cola q, Elem e) {
 	return q;
 }
 
-Elem frente(Cola q) {
+Avl frente(Cola q) {
 	return q -> prim -> dato;
 }
 
-void desformar(Cola q) {
+Cola desformar(Cola q) {
 	if (esNueva(q)) {
-		return;
+		return q;
 	}
 
 	// se pone aqui el temp para que el free(temp) aplique para cualquiera de los dos casos siguientes
 	ApNodo temp = q -> prim;
 
 	if (q -> prim == q -> ult) {
-		q -> prim = q -> ult = NULL;
-		return;
-	}
 
+		q -> prim = q -> ult = NULL;
+
+		return q;
+	}
 	q -> prim = q -> prim -> sig;
 
 	free(temp);
+	return q;
 }
 
 void impCola(Cola q) {
 	ApNodo primero = q -> prim;
 	while (primero != NULL) {
-		std::cout << primero -> dato << std::endl;
+		std::cout << primero -> dato -> data << std::endl;
 		primero = primero -> sig;
 	}
 }
+
+int listaTam(ApNodo ap) {
+	if (!ap)
+		return 0;
+	return 1 + listaTam(ap -> sig);
+}
+
+int ColaTam(Cola q) {
+	ApNodo ap = q -> prim;
+	return listaTam(ap);
+}
+
+

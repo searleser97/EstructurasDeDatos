@@ -55,16 +55,17 @@ Arbin BuildArbin(Elem arr[], int n, int actPos) {
 
 }
 
-void heapSort(Elem arr[], int n) {
+int* heapSort(Elem arr[], int n) {
     Heap h = consHeap(BuildArbin(arr, n, 0));
+    int* orderedArr = (int*) malloc(n * sizeof(int));
 
-    while (true) {
+    for (int i = 0; h; i++) {
         // printBfs(h);
-        cout << value(h) << endl;
+        orderedArr[i] = value(h);
         h = deleteTop(h);
-        if (!h)
-            break;
     }
+
+    return orderedArr;
 }
 
 
@@ -75,15 +76,12 @@ int main () {
     RecibeElems(arr, n);
 
 
-    heapSort(arr, n);
-
-
-
-    // Arbin a = BuildArbin(arr, n, 0);
-    // cout << "=======" << endl;
-    // printBfs(a);
-    // cout << "......." << endl;
-    // Heap h = consHeap(a);
-    // printBfs(h);
+    int* orderedArr = heapSort(arr, n);
+    cout << orderedArr[0]<< endl;
+    for (int i = 0; i < n; ++i)
+    {
+        cout << orderedArr[i] << " ";
+    }
+    cout << endl;
     return 0;
 }

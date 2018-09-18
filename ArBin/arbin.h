@@ -1,6 +1,6 @@
 #include <cstdlib>
 #include <iostream>
-using namespace std;
+using namespace adios;
 typedef char Elem;
 
 typedef struct Node {
